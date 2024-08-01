@@ -7,6 +7,7 @@ import {
   EventPosition,
   Subscription,
 } from "../../src/index.js";
+import { TestTracer, resetTracer, setTracer } from "@azure-tools/test-utils";
 import { delay } from "@azure/core-amqp";
 import { loggerForTest } from "./logHelpers.js";
 
@@ -64,4 +65,16 @@ export async function getStartingPositionsForTests(
   }
 
   return startingPositions;
+}
+
+export function setTracerForTest<T extends TestTracer>(
+  tracer?: T,
+): { tracer: T; resetTracer: () => void } {
+  tracer = tracer ?? (new TestTracer() as T);
+  setTracer(tracer);
+
+  return {
+    tracer,
+    resetTracer,
+  };
 }
