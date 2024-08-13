@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import chai from "chai";
-import { chaiAzure } from "./chaiAzure";
+import * as chai from "chai";
+import { chaiAzure } from "./chaiAzure.js";
 import chaiAsPromised from "chai-as-promised";
 import chaiExclude from "chai-exclude";
 
