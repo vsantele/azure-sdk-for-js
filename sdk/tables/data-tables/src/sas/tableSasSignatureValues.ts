@@ -7,13 +7,13 @@
  * TableSASSignatureValues is used to help generating SAS tokens for tables.
  */
 
-import { SasIPRange, ipRangeToString } from "./sasIPRange";
-import { SasProtocol, SasQueryParameters } from "./sasQueryParameters";
-import { TableSasPermissions, tableSasPermissionsToString } from "./tableSasPermisions";
+import { SasIPRange, ipRangeToString } from "./sasIPRange.js";
+import { SasProtocol, SasQueryParameters } from "./sasQueryParameters.js";
+import { TableSasPermissions, tableSasPermissionsToString } from "./tableSasPermisions.js";
 import { NamedKeyCredential } from "@azure/core-auth";
-import { SERVICE_VERSION } from "../utils/constants";
-import { computeHMACSHA256 } from "../utils/computeHMACSHA256";
-import { truncatedISO8061Date } from "../utils/truncateISO8061Date";
+import { SERVICE_VERSION } from "../utils/constants.js";
+import { computeHMACSHA256 } from "../utils/computeHMACSHA256.js";
+import { truncatedISO8061Date } from "../utils/truncateISO8061Date.js";
 
 /**
  * ONLY AVAILABLE IN NODE.JS RUNTIME.

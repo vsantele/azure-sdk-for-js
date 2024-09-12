@@ -2,12 +2,10 @@
 // Licensed under the MIT License.
 
 import { Recorder, isPlaybackMode } from "@azure-tools/test-recorder";
-
-import { Context } from "mocha";
-import { TableClient } from "../../src";
-import { assert } from "chai";
-import { createTableClient } from "./utils/recordedClient";
+import { TableClient } from "../../src/index.js";
+import { createTableClient } from "./utils/recordedClient.js";
 import { isNodeLike } from "@azure/core-util";
+import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
 
 describe(`Access Policy operations`, function () {
   let client: TableClient;
@@ -15,8 +13,8 @@ describe(`Access Policy operations`, function () {
   let recorder: Recorder;
   const tableName = `AccessPolicy`;
 
-  beforeEach(async function (this: Context) {
-    recorder = new Recorder(this.currentTest);
+  beforeEach(async function (ctx) {
+    recorder = new Recorder(ctx);
     client = await createTableClient(tableName, "AccountKey", recorder);
   });
 
@@ -24,9 +22,9 @@ describe(`Access Policy operations`, function () {
     await recorder.stop();
   });
 
-  before(async function (this: Context) {
+  before(async function (ctx) {
     if (!isNodeLike) {
-      this.skip();
+      ctx.task.skip();
     }
 
     if (!isPlaybackMode()) {

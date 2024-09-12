@@ -4,7 +4,7 @@
 import { OperationOptions, OperationRequest } from "@azure/core-client";
 import { PipelineResponse, RestError } from "@azure/core-rest-pipeline";
 import { AzureLogger } from "@azure/logger";
-import { TableServiceError } from "../generated";
+import { TableServiceError } from "../generated/index.js";
 
 export type TableServiceErrorResponse = PipelineResponse & {
   /**

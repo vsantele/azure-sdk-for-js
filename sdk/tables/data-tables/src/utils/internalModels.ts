@@ -15,8 +15,8 @@ import {
   TransactionAction,
   UpdateMode,
   UpdateTableEntityOptions,
-} from "../models";
-import { DeleteTableEntityResponse, UpdateEntityResponse, UpsertEntityResponse } from "..";
+} from "../models.js";
+import { DeleteTableEntityResponse, UpdateEntityResponse, UpsertEntityResponse } from "../index.js";
 import { Pipeline, PipelineRequest } from "@azure/core-rest-pipeline";
 import { NamedKeyCredential } from "@azure/core-auth";
 import { OperationOptions } from "@azure/core-client";

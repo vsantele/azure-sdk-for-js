@@ -1,21 +1,20 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { base64Decode, base64Encode } from "../../src/utils/bufferSerializer";
+import { base64Decode, base64Encode } from "../../src/utils/bufferSerializer.js";
 
-import { ConnectionString } from "../../src/utils/internalModels";
-import { Context } from "mocha";
-import { assert } from "chai";
-import { extractConnectionStringParts } from "../../src/utils/connectionString";
+import { ConnectionString } from "../../src/utils/internalModels.js";
+import { extractConnectionStringParts } from "../../src/utils/connectionString.js";
 import { isNodeLike } from "@azure/core-util";
+import { describe, it, assert } from "vitest";
 
 describe("Utility Helpers", function () {
   describe("extractConnectionStringParts", function () {
     describe("Account Connection String", function () {
-      beforeEach(function (this: Context) {
+      beforeEach(function (ctx) {
         if (!isNodeLike) {
           // Account connection string is not supported for Browsers
-          this.skip();
+          ctx.task.skip();
         }
       });
       it("should handle connection string without TableEndpoint", function () {

@@ -18,13 +18,13 @@ import {
   TransactionAction,
   UpdateMode,
   UpdateTableEntityOptions,
-} from "./models";
+} from "./models.js";
 import {
   DeleteTableEntityResponse,
   SetAccessPolicyResponse,
   UpdateEntityResponse,
   UpsertEntityResponse,
-} from "./generatedModels";
+} from "./generatedModels.js";
 import {
   FullOperationResponse,
   InternalClientPipelineOptions,
@@ -32,7 +32,7 @@ import {
   ServiceClient,
   ServiceClientOptions,
 } from "@azure/core-client";
-import { GeneratedClient, TableDeleteEntityOptionalParams } from "./generated";
+import { GeneratedClient, TableDeleteEntityOptionalParams } from "./generated/index.js";
 import {
   NamedKeyCredential,
   SASCredential,
@@ -41,8 +41,8 @@ import {
   isSASCredential,
   isTokenCredential,
 } from "@azure/core-auth";
-import { STORAGE_SCOPE, TablesLoggingAllowedHeaderNames } from "./utils/constants";
-import { decodeContinuationToken, encodeContinuationToken } from "./utils/continuationToken";
+import { STORAGE_SCOPE, TablesLoggingAllowedHeaderNames } from "./utils/constants.js";
+import { decodeContinuationToken, encodeContinuationToken } from "./utils/continuationToken.js";
 import {
   deserialize,
   deserializeObjectsArray,
@@ -50,28 +50,28 @@ import {
   serialize,
   serializeQueryOptions,
   serializeSignedIdentifiers,
-} from "./serialization";
+} from "./serialization.js";
 import { parseXML, stringifyXML } from "@azure/core-xml";
 
-import { InternalTableTransaction } from "./TableTransaction";
-import { ListEntitiesResponse } from "./utils/internalModels";
+import { InternalTableTransaction } from "./TableTransaction.js";
+import { ListEntitiesResponse } from "./utils/internalModels.js";
 import { PagedAsyncIterableIterator } from "@azure/core-paging";
 import { Pipeline } from "@azure/core-rest-pipeline";
-import { Table } from "./generated/operationsInterfaces";
-import { TableQueryEntitiesOptionalParams } from "./generated/models";
-import { Uuid } from "./utils/uuid";
-import { apiVersionPolicy } from "./utils/apiVersionPolicy";
-import { cosmosPatchPolicy } from "./cosmosPathPolicy";
-import { escapeQuotes } from "./odata";
-import { getClientParamsFromConnectionString } from "./utils/connectionString";
-import { handleTableAlreadyExists } from "./utils/errorHelpers";
-import { isCosmosEndpoint } from "./utils/isCosmosEndpoint";
-import { isCredential } from "./utils/isCredential";
-import { logger } from "./logger";
-import { setTokenChallengeAuthenticationPolicy } from "./utils/challengeAuthenticationUtils";
-import { tablesNamedKeyCredentialPolicy } from "./tablesNamedCredentialPolicy";
-import { tablesSASTokenPolicy } from "./tablesSASTokenPolicy";
-import { tracingClient } from "./utils/tracing";
+import { Table } from "./generated/operationsInterfaces/index.js";
+import { TableQueryEntitiesOptionalParams } from "./generated/models/index.js";
+import { Uuid } from "./utils/uuid.js";
+import { apiVersionPolicy } from "./utils/apiVersionPolicy.js";
+import { cosmosPatchPolicy } from "./cosmosPathPolicy.js";
+import { escapeQuotes } from "./odata.js";
+import { getClientParamsFromConnectionString } from "./utils/connectionString.js";
+import { handleTableAlreadyExists } from "./utils/errorHelpers.js";
+import { isCosmosEndpoint } from "./utils/isCosmosEndpoint.js";
+import { isCredential } from "./utils/isCredential.js";
+import { logger } from "./logger.js";
+import { setTokenChallengeAuthenticationPolicy } from "./utils/challengeAuthenticationUtils.js";
+import { tablesNamedKeyCredentialPolicy } from "./tablesNamedCredentialPolicy.js";
+import { tablesSASTokenPolicy } from "./tablesSASTokenPolicy.js";
+import { tracingClient } from "./utils/tracing.js";
 
 /**
  * A TableClient represents a Client to the Azure Tables service allowing you

@@ -2,20 +2,19 @@
 // Licensed under the MIT License.
 
 import { Recorder, isPlaybackMode } from "@azure-tools/test-recorder";
-import { TableItem, TableItemResultPage, TableServiceClient, odata } from "../../src";
-import { Context } from "mocha";
+import { TableItem, TableItemResultPage, TableServiceClient, odata } from "../../src/index.js";
 import { FullOperationResponse, OperationOptions } from "@azure/core-client";
-import { createTableServiceClient } from "./utils/recordedClient";
-import { assert } from "@azure-tools/test-utils";
+import { createTableServiceClient } from "./utils/recordedClient.js";
 import { isNodeLike } from "@azure/core-util";
+import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
 
 describe(`TableServiceClient`, function () {
   let client: TableServiceClient;
   let recorder: Recorder;
   const suffix = isNodeLike ? `node` : `browser`;
 
-  beforeEach(async function (this: Context) {
-    recorder = new Recorder(this.currentTest);
+  beforeEach(async function (ctx) {
+    recorder = new Recorder(ctx);
     client = await createTableServiceClient("SASConnectionString", recorder);
   });
 
@@ -50,7 +49,7 @@ describe(`TableServiceClient`, function () {
     const tableNames: string[] = [];
     const expectedTotalItems = 20;
     let unRecordedClient: TableServiceClient;
-    before(async function (this: Context) {
+    before(async function (ctx) {
       // Create tables to be listed
       if (!isPlaybackMode()) {
         unRecordedClient = await createTableServiceClient("SASConnectionString");
@@ -63,7 +62,7 @@ describe(`TableServiceClient`, function () {
       }
     });
 
-    after(async function (this: Context) {
+    after(async function (ctx) {
       // Cleanup tables
       if (!isPlaybackMode()) {
         this.timeout(10000);

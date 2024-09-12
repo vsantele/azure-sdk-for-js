@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { RestError, TableClient, TableServiceClient } from "../../src";
+import { RestError, TableClient, TableServiceClient } from "../../src/index.js";
 
-import { TableServiceErrorResponse } from "../../src/utils/errorHelpers";
-import { assert } from "chai";
+import { TableServiceErrorResponse } from "../../src/utils/errorHelpers.js";
 import { createHttpHeaders } from "@azure/core-rest-pipeline";
+import { describe, it, assert } from "vitest";
 
 describe("TableClient CreationHandling", function () {
   let unrecordedClient: TableClient;

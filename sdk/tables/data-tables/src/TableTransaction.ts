@@ -9,7 +9,7 @@ import {
   TransactionAction,
   UpdateMode,
   UpdateTableEntityOptions,
-} from "./models";
+} from "./models.js";
 import { NamedKeyCredential, SASCredential, TokenCredential } from "@azure/core-auth";
 import {
   OperationOptions,
@@ -28,20 +28,20 @@ import {
 import {
   getInitialTransactionBody,
   getTransactionHttpRequestBody,
-} from "./utils/transactionHelpers";
+} from "./utils/transactionHelpers.js";
 import {
   transactionHeaderFilterPolicy,
   transactionHeaderFilterPolicyName,
   transactionRequestAssemblePolicy,
   transactionRequestAssemblePolicyName,
-} from "./TablePolicies";
+} from "./TablePolicies.js";
 
-import { TableClientLike } from "./utils/internalModels";
-import { TableServiceErrorOdataError } from "./generated";
-import { cosmosPatchPolicy } from "./cosmosPathPolicy";
-import { getTransactionHeaders } from "./utils/transactionHeaders";
-import { isCosmosEndpoint } from "./utils/isCosmosEndpoint";
-import { tracingClient } from "./utils/tracing";
+import { TableClientLike } from "./utils/internalModels.js";
+import { TableServiceErrorOdataError } from "./generated/index.js";
+import { cosmosPatchPolicy } from "./cosmosPathPolicy.js";
+import { getTransactionHeaders } from "./utils/transactionHeaders.js";
+import { isCosmosEndpoint } from "./utils/isCosmosEndpoint.js";
+import { tracingClient } from "./utils/tracing.js";
 
 /**
  * Helper to build a list of transaction actions

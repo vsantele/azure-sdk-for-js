@@ -5,7 +5,7 @@ import {
   HeaderConstants,
   TRANSACTION_HTTP_LINE_ENDING,
   TRANSACTION_HTTP_VERSION_1_1,
-} from "./utils/constants";
+} from "./utils/constants.js";
 import {
   PipelinePolicy,
   PipelineRequest,
@@ -14,7 +14,7 @@ import {
   createHttpHeaders,
   createPipelineRequest,
 } from "@azure/core-rest-pipeline";
-import { getChangeSetBoundary } from "./utils/transactionHelpers";
+import { getChangeSetBoundary } from "./utils/transactionHelpers.js";
 
 export const transactionRequestAssemblePolicyName = "transactionRequestAssemblePolicy";
 

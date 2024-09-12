@@ -6,10 +6,10 @@ import {
   deserializeSignedIdentifier,
   serialize,
   serializeSignedIdentifiers,
-} from "../../src/serialization";
+} from "../../src/serialization.js";
 
-import { Edm } from "../../src";
-import { assert } from "chai";
+import { Edm } from "../../src/index.js";
+import { describe, it, assert } from "vitest";
 
 interface Entity {
   strProp?: string;

@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 import { HttpClient, PipelineResponse, createHttpHeaders } from "@azure/core-rest-pipeline";
-import { TableClient, TableServiceClient } from "../../src";
-import { assert } from "chai";
+import { TableClient, TableServiceClient } from "../../src/index.js";
+import { describe, it, assert } from "vitest";
 
 describe("ErrorHandling", function () {
   describe("TableClient", function () {

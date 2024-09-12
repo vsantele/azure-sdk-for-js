@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-
-import * as sinon from "sinon";
-import { AzureNamedKeyCredential, generateAccountSas, generateTableSas } from "../../../src";
+import { AzureNamedKeyCredential, generateAccountSas, generateTableSas } from "../../../src/index.js";
 import {
   expectedSas1,
   expectedSas2,
@@ -13,8 +11,8 @@ import {
   expectedSas7,
   expectedSas8,
   expectedSas9,
-} from "../fakeTestSecrets";
-import { assert } from "chai";
+} from "../fakeTestSecrets.js";
+import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
 
 describe("SAS generation", function () {
   describe("generateTableSAS", function () {

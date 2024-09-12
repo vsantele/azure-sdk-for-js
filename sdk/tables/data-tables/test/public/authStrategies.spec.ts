@@ -1,16 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { createTableClient, createTableServiceClient } from "./utils/recordedClient";
-
-import { Context } from "mocha";
-import { CreateClientMode } from "./utils/recordedClient";
-import { TableClient } from "../../src/TableClient";
-import { TableServiceClient } from "../../src/TableServiceClient";
-import { assert } from "chai";
+import { createTableClient, createTableServiceClient } from "./utils/recordedClient.js";
+import { CreateClientMode } from "./utils/recordedClient.js";
+import { TableClient } from "../../src/TableClient.js";
+import { TableServiceClient } from "../../src/TableServiceClient.js";
 import { isLiveMode } from "@azure-tools/test-recorder";
 import { isNodeLike } from "@azure/core-util";
-import { odata } from "../../src/odata";
+import { odata } from "../../src/odata.js";
+import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
 
 const platform = isNodeLike ? "node" : "browser";
 const authMethods: CreateClientMode[] = isNodeLike
@@ -29,7 +27,7 @@ if (isLiveMode()) {
       });
 
       describe("TableServiceClient", function () {
-        beforeEach(async function (this: Context) {
+        beforeEach(async function (ctx) {
           serviceClient = await createTableServiceClient(authMethod);
         });
 
@@ -49,7 +47,7 @@ if (isLiveMode()) {
       });
 
       describe("TableClient", function () {
-        beforeEach(async function (this: Context) {
+        beforeEach(async function (ctx) {
           tableClient = await createTableClient(tableClientTableName, authMethod);
         });
 

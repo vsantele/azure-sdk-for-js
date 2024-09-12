@@ -7,7 +7,7 @@ import {
   ServiceProperties,
   SetPropertiesOptions,
   SetPropertiesResponse,
-} from "./generatedModels";
+} from "./generatedModels.js";
 import {
   InternalClientPipelineOptions,
   OperationOptions,
@@ -18,7 +18,7 @@ import {
   TableItem,
   TableQueryOptions,
   TableServiceClientOptions,
-} from "./models";
+} from "./models.js";
 import {
   NamedKeyCredential,
   SASCredential,
@@ -27,27 +27,27 @@ import {
   isSASCredential,
   isTokenCredential,
 } from "@azure/core-auth";
-import { STORAGE_SCOPE, TablesLoggingAllowedHeaderNames } from "./utils/constants";
-import { Service, Table } from "./generated";
+import { STORAGE_SCOPE, TablesLoggingAllowedHeaderNames } from "./utils/constants.js";
+import { Service, Table } from "./generated/index.js";
 import {
   injectSecondaryEndpointHeader,
   tablesSecondaryEndpointPolicy,
-} from "./secondaryEndpointPolicy";
+} from "./secondaryEndpointPolicy.js";
 import { parseXML, stringifyXML } from "@azure/core-xml";
 
-import { GeneratedClient } from "./generated/generatedClient";
+import { GeneratedClient } from "./generated/generatedClient.js";
 import { PagedAsyncIterableIterator } from "@azure/core-paging";
 import { Pipeline } from "@azure/core-rest-pipeline";
-import { TableItemResultPage } from "./models";
-import { apiVersionPolicy } from "./utils/apiVersionPolicy";
-import { getClientParamsFromConnectionString } from "./utils/connectionString";
-import { handleTableAlreadyExists } from "./utils/errorHelpers";
-import { isCredential } from "./utils/isCredential";
-import { logger } from "./logger";
-import { setTokenChallengeAuthenticationPolicy } from "./utils/challengeAuthenticationUtils";
-import { tablesNamedKeyCredentialPolicy } from "./tablesNamedCredentialPolicy";
-import { tablesSASTokenPolicy } from "./tablesSASTokenPolicy";
-import { tracingClient } from "./utils/tracing";
+import { TableItemResultPage } from "./models.js";
+import { apiVersionPolicy } from "./utils/apiVersionPolicy.js";
+import { getClientParamsFromConnectionString } from "./utils/connectionString.js";
+import { handleTableAlreadyExists } from "./utils/errorHelpers.js";
+import { isCredential } from "./utils/isCredential.js";
+import { logger } from "./logger.js";
+import { setTokenChallengeAuthenticationPolicy } from "./utils/challengeAuthenticationUtils.js";
+import { tablesNamedKeyCredentialPolicy } from "./tablesNamedCredentialPolicy.js";
+import { tablesSASTokenPolicy } from "./tablesSASTokenPolicy.js";
+import { tracingClient } from "./utils/tracing.js";
 
 /**
  * A TableServiceClient represents a Client to the Azure Tables service allowing you
