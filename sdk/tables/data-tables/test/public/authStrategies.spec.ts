@@ -8,7 +8,7 @@ import { TableServiceClient } from "../../src/TableServiceClient.js";
 import { isLiveMode } from "@azure-tools/test-recorder";
 import { isNodeLike } from "@azure/core-util";
 import { odata } from "../../src/odata.js";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, assert, beforeEach, afterAll } from "vitest";
 
 const platform = isNodeLike ? "node" : "browser";
 const authMethods: CreateClientMode[] = isNodeLike
@@ -22,12 +22,12 @@ if (isLiveMode()) {
       let tableClient: TableClient;
       const tableClientTableName = `Auth${authMethod}${platform}`;
 
-      after(async function () {
+      afterAll(async function () {
         await tableClient.deleteTable();
       });
 
       describe("TableServiceClient", function () {
-        beforeEach(async function (ctx) {
+        beforeEach(async function () {
           serviceClient = await createTableServiceClient(authMethod);
         });
 
@@ -47,7 +47,7 @@ if (isLiveMode()) {
       });
 
       describe("TableClient", function () {
-        beforeEach(async function (ctx) {
+        beforeEach(async function () {
           tableClient = await createTableClient(tableClientTableName, authMethod);
         });
 

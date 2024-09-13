@@ -6,7 +6,10 @@ import { Recorder, isPlaybackMode } from "@azure-tools/test-recorder";
 import { isNodeLike } from "@azure/core-util";
 import { FullOperationResponse, OperationOptions } from "@azure/core-client";
 import { createTableClient } from "./utils/recordedClient.js";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
+import { chai, describe, it, assert, beforeAll, beforeEach, afterEach, afterAll } from "vitest";
+import { chaiAzure } from "@azure-tools/test-utils-vitest";
+
+chai.use(chaiAzure);
 
 describe("special characters", function () {
   const tableName = `SpecialChars`;
@@ -21,7 +24,7 @@ describe("special characters", function () {
     await recorder.stop();
   });
 
-  it("should handle partition and row keys with special chars", async function (ctx) {
+  it("should handle partition and row keys with special chars", async function () {
     await client.createTable();
 
     try {
@@ -58,7 +61,7 @@ describe(`TableClient`, function () {
     client = await createTableClient(tableName, "SASConnectionString", recorder);
   });
 
-  before(async function () {
+  beforeAll(async function () {
     if (!isPlaybackMode()) {
       unRecordedClient = await createTableClient(tableName, "SASConnectionString");
       await unRecordedClient.createTable();
@@ -69,7 +72,7 @@ describe(`TableClient`, function () {
     await recorder.stop();
   });
 
-  after(async function () {
+  afterAll(async function () {
     if (!isPlaybackMode()) {
       unRecordedClient = await createTableClient(tableName, "SASConnectionString");
       await unRecordedClient.deleteTable();
@@ -78,10 +81,9 @@ describe(`TableClient`, function () {
 
   describe("listEntities", function () {
     // Create required entities for testing list operations
-    before(async function (ctx) {
+    beforeAll(async function () {
       unRecordedClient = await createTableClient(tableName, "SASConnectionString");
       if (!isPlaybackMode()) {
-        this.timeout(10000);
         await unRecordedClient.createEntity({
           partitionKey: listPartitionKey,
           rowKey: "binary1",
@@ -124,7 +126,7 @@ describe(`TableClient`, function () {
       }
 
       assert.lengthOf(all, totalItems);
-    }).timeout(10000);
+    });
 
     it("should list by page", async function () {
       const barItems = 20;
@@ -425,7 +427,7 @@ describe(`TableClient`, function () {
       assert.deepEqual(result.testField, testGuid);
     });
 
-    it("should createEntity with Int64", async function (this: Mocha.Context) {
+    it("should createEntity with Int64", async function () {
       type TestType = {
         testField: Edm<"Int64">;
       };

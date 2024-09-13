@@ -5,9 +5,9 @@ import { Recorder, isPlaybackMode } from "@azure-tools/test-recorder";
 import { TableClient } from "../../src/index.js";
 import { createTableClient } from "./utils/recordedClient.js";
 import { isNodeLike } from "@azure/core-util";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, assert, beforeEach, afterEach, beforeAll, afterAll } from "vitest";
 
-describe(`Access Policy operations`, function () {
+describe.skipIf(!isNodeLike)(`Access Policy operations`, function () {
   let client: TableClient;
   let unrecordedClient: TableClient;
   let recorder: Recorder;
@@ -22,18 +22,14 @@ describe(`Access Policy operations`, function () {
     await recorder.stop();
   });
 
-  before(async function (ctx) {
-    if (!isNodeLike) {
-      ctx.task.skip();
-    }
-
+  beforeAll(async function () {
     if (!isPlaybackMode()) {
       unrecordedClient = await createTableClient(tableName, "SASConnectionString");
       await unrecordedClient.createTable();
     }
   });
 
-  after(async function () {
+  afterAll(async function () {
     if (!isPlaybackMode() && isNodeLike) {
       await unrecordedClient.deleteTable();
     }

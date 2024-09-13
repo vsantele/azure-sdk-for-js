@@ -59,7 +59,6 @@ import { PagedAsyncIterableIterator } from "@azure/core-paging";
 import { Pipeline } from "@azure/core-rest-pipeline";
 import { Table } from "./generated/operationsInterfaces/index.js";
 import { TableQueryEntitiesOptionalParams } from "./generated/models/index.js";
-import { Uuid } from "./utils/uuid.js";
 import { apiVersionPolicy } from "./utils/apiVersionPolicy.js";
 import { cosmosPatchPolicy } from "./cosmosPathPolicy.js";
 import { escapeQuotes } from "./odata.js";
@@ -72,6 +71,7 @@ import { setTokenChallengeAuthenticationPolicy } from "./utils/challengeAuthenti
 import { tablesNamedKeyCredentialPolicy } from "./tablesNamedCredentialPolicy.js";
 import { tablesSASTokenPolicy } from "./tablesSASTokenPolicy.js";
 import { tracingClient } from "./utils/tracing.js";
+import { randomUUID } from "@azure/core-util";
 
 /**
  * A TableClient represents a Client to the Azure Tables service allowing you
@@ -857,8 +857,8 @@ export class TableClient {
    */
   public async submitTransaction(actions: TransactionAction[]): Promise<TableTransactionResponse> {
     const partitionKey = actions[0][1].partitionKey;
-    const transactionId = Uuid.generateUuid();
-    const changesetId = Uuid.generateUuid();
+    const transactionId = randomUUID();
+    const changesetId = randomUUID();
 
     // Add pipeline
     const transactionClient = new InternalTableTransaction(

@@ -168,7 +168,7 @@ describe("Deserializer", function () {
     assert.strictEqual(deserialized.int32Prop, int32Value);
   });
 
-  it("should deserialize an Int64 value to bigint", function (this: Mocha.Context) {
+  it("should deserialize an Int64 value to bigint", function () {
     const int64Value = "12345678910";
     const deserialized = deserialize({
       int64ObjProp: int64Value,

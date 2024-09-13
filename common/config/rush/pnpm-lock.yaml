@@ -21017,7 +21017,7 @@ packages:
     dev: false
 
   file:projects/data-tables.tgz:
-    resolution: {integrity: sha512-QdisqoHmzFsx81qKn8q58i+RFNwH+dl2vhU7cpeWjO6bt2FRbDiF+B7yOByDJk2s76ojoYK1yupeFMOBfcsCRw==, tarball: file:projects/data-tables.tgz}
+    resolution: {integrity: sha512-97If8y5h7QqEePl+L19XQDPsXkQuZBDv6Xue/sSRb7K/p2dgpkyUhSczZnplOdEmbdVjYNe82rNSloKsGXBJog==, tarball: file:projects/data-tables.tgz}
     name: '@rush-temp/data-tables'
     version: 0.0.0
     dependencies:
@@ -21031,7 +21031,7 @@ packages:
       '@types/sinon': 17.0.3
       '@vitest/browser': 2.0.5(playwright@1.47.0)(typescript@5.5.4)(vitest@2.0.5)
       '@vitest/coverage-istanbul': 2.0.5(vitest@2.0.5)
-      chai: 4.3.10
+      chai: 5.1.1
       cross-env: 7.0.3
       dotenv: 16.4.5
       eslint: 9.10.0

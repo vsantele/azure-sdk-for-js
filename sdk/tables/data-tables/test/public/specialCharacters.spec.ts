@@ -5,15 +5,10 @@ import { TableClient, TableEntityResult, TransactionAction, odata } from "../../
 import { createTableClient } from "./utils/recordedClient.js";
 import { isLiveMode } from "@azure-tools/test-recorder";
 import { isNodeLike } from "@azure/core-util";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, assert, beforeEach, afterAll } from "vitest";
 
-describe("SpecialCharacters", function () {
-  before(function (ctx) {
-    if (!isLiveMode()) {
-      // Only run in live tests to avoid unecessary extra time in CI
-      ctx.task.skip();
-    }
-  });
+// Only run in live tests to avoid unnecessary extra time in CI
+describe.skipIf(!isLiveMode)("SpecialCharacters", function () {
   let client: TableClient;
   const suffix = isNodeLike ? "Node" : "Browser";
   const tableName = `SpecialCharacterTest${suffix}`;
@@ -42,7 +37,7 @@ describe("SpecialCharacters", function () {
   ];
 
   describe("Single operations", function () {
-    beforeEach(async function (ctx) {
+    beforeEach(async function () {
       client = await createTableClient(tableName, "TokenCredential");
     });
 
@@ -117,13 +112,13 @@ describe("SpecialCharacters", function () {
       });
     });
 
-    after(async function () {
+    afterAll(async function () {
       await client.deleteTable();
     });
   });
 
   describe("Batch", function () {
-    beforeEach(async function (ctx) {
+    beforeEach(async function () {
       client = await createTableClient(`${tableName}Batch`, "TokenCredential");
     });
 
@@ -243,7 +238,7 @@ describe("SpecialCharacters", function () {
       const result = await client.submitTransaction(actions);
       assert.equal(result.status, 202);
     });
-    after(async function () {
+    afterAll(async function () {
       await client.deleteTable();
     });
   });

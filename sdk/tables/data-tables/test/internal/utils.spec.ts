@@ -10,13 +10,8 @@ import { describe, it, assert } from "vitest";
 
 describe("Utility Helpers", function () {
   describe("extractConnectionStringParts", function () {
-    describe("Account Connection String", function () {
-      beforeEach(function (ctx) {
-        if (!isNodeLike) {
-          // Account connection string is not supported for Browsers
-          ctx.task.skip();
-        }
-      });
+    // Account connection string is not supported for Browsers
+    describe.skipIf(!isNodeLike)("Account Connection String", function () {
       it("should handle connection string without TableEndpoint", function () {
         const validConnectionString =
           "DefaultEndpointsProtocol=https;AccountName=testaccount;AccountKey=REDACTED;EndpointSuffix=core.windows.net";

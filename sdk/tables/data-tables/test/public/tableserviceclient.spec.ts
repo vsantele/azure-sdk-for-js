@@ -6,7 +6,7 @@ import { TableItem, TableItemResultPage, TableServiceClient, odata } from "../..
 import { FullOperationResponse, OperationOptions } from "@azure/core-client";
 import { createTableServiceClient } from "./utils/recordedClient.js";
 import { isNodeLike } from "@azure/core-util";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, assert, beforeAll, afterAll, beforeEach, afterEach } from "vitest";
 
 describe(`TableServiceClient`, function () {
   let client: TableServiceClient;
@@ -49,11 +49,10 @@ describe(`TableServiceClient`, function () {
     const tableNames: string[] = [];
     const expectedTotalItems = 20;
     let unRecordedClient: TableServiceClient;
-    before(async function (ctx) {
+    beforeAll(async function () {
       // Create tables to be listed
       if (!isPlaybackMode()) {
         unRecordedClient = await createTableServiceClient("SASConnectionString");
-        this.timeout(10000);
         for (let i = 0; i < 20; i++) {
           const tableName = `ListTableTest${suffix}${i}`;
           await unRecordedClient.createTable(tableName);
@@ -62,15 +61,14 @@ describe(`TableServiceClient`, function () {
       }
     });
 
-    after(async function (ctx) {
+    afterAll(async function () {
       // Cleanup tables
       if (!isPlaybackMode()) {
-        this.timeout(10000);
         try {
           for (const table of tableNames) {
             await unRecordedClient.deleteTable(table);
           }
-        } catch (error: any) {
+        } catch {
           console.warn(`Failed to delete a table during cleanup`);
         }
       }
