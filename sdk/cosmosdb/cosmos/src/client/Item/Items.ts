@@ -957,7 +957,7 @@ export class Items {
             operation.resourceBody,
           );
           break;
-        case BulkOperationType.Patch:
+        case BulkOperationType.Patch: {
           operation.id = await this.container.encryptionProcessor.getEncryptedId(operation.id);
           const body = operation.resourceBody;
           const patchRequestBody = Array.isArray(body) ? body : body.operations;
@@ -970,6 +970,7 @@ export class Items {
             }
           }
           break;
+        }
       }
     }
     diagnosticNode.endEncryptionDiagnostics(Constants.Encryption.DiagnosticsEncryptOperation);
