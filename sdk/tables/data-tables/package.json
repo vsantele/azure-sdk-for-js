@@ -1,6 +1,6 @@
 {
   "name": "@azure/data-tables",
-  "version": "13.2.3",
+  "version": "13.3.0",
   "description": "An isomorphic client library for the Azure Tables service.",
   "sdk-type": "client",
   "main": "./dist/commonjs/index.js",
@@ -88,7 +88,7 @@
     "playwright": "^1.47.0",
     "rimraf": "^5.0.5",
     "tshy": "^3.0.2",
-    "typescript": "~5.5.3",
+    "typescript": "~5.6.2",
     "util": "^0.12.1",
     "vitest": "^2.0.5"
   },

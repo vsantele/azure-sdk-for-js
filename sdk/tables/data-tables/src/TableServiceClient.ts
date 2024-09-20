@@ -27,7 +27,7 @@ import {
   isSASCredential,
   isTokenCredential,
 } from "@azure/core-auth";
-import { STORAGE_SCOPE, TablesLoggingAllowedHeaderNames } from "./utils/constants.js";
+import { COSMOS_SCOPE, STORAGE_SCOPE, TablesLoggingAllowedHeaderNames } from "./utils/constants.js";
 import { Service, Table } from "./generated/index.js";
 import {
   injectSecondaryEndpointHeader,
@@ -48,6 +48,7 @@ import { setTokenChallengeAuthenticationPolicy } from "./utils/challengeAuthenti
 import { tablesNamedKeyCredentialPolicy } from "./tablesNamedCredentialPolicy.js";
 import { tablesSASTokenPolicy } from "./tablesSASTokenPolicy.js";
 import { tracingClient } from "./utils/tracing.js";
+import { isCosmosEndpoint } from "./utils/isCosmosEndpoint.js";
 
 /**
  * A TableServiceClient represents a Client to the Azure Tables service allowing you
@@ -159,6 +160,7 @@ export class TableServiceClient {
     options?: TableServiceClientOptions,
   ) {
     this.url = url;
+    const isCosmos = isCosmosEndpoint(this.url);
     const credential = isCredential(credentialOrOptions) ? credentialOrOptions : undefined;
     const clientOptions =
       (!isCredential(credentialOrOptions) ? credentialOrOptions : options) || {};
@@ -187,7 +189,8 @@ export class TableServiceClient {
     }
 
     if (isTokenCredential(credential)) {
-      setTokenChallengeAuthenticationPolicy(client.pipeline, credential, STORAGE_SCOPE);
+      const scope = isCosmos ? COSMOS_SCOPE : STORAGE_SCOPE;
+      setTokenChallengeAuthenticationPolicy(client.pipeline, credential, scope);
     }
 
     if (options?.version) {
