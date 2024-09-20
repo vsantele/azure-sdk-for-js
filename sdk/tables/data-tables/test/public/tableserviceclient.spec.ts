@@ -6,7 +6,10 @@ import { TableItem, TableItemResultPage, TableServiceClient, odata } from "../..
 import { FullOperationResponse, OperationOptions } from "@azure/core-client";
 import { createTableServiceClient } from "./utils/recordedClient.js";
 import { isNodeLike } from "@azure/core-util";
-import { describe, it, assert, beforeAll, afterAll, beforeEach, afterEach } from "vitest";
+import { chai, describe, it, assert, beforeAll, afterAll, beforeEach, afterEach } from "vitest";
+import { chaiAzure } from "@azure-tools/test-utils-vitest";
+
+chai.use(chaiAzure);
 
 describe(`TableServiceClient`, function () {
   let client: TableServiceClient;
