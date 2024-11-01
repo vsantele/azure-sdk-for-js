@@ -205,8 +205,21 @@ export interface ContentFilterCitedDetectionResultOutput {
 }
 
 // @public
+export interface ContentFilterCompletionTextSpan {
+    completion_end_offset: number;
+    completion_start_offset: number;
+}
+
+// @public
+export interface ContentFilterCompletionTextSpanResult {
+    details: Array<ContentFilterCompletionTextSpan>;
+    detected: boolean;
+    filtered: boolean;
+}
+
+// @public
 export interface ContentFilterDetailedResults {
-    details: ContentFilterBlocklistIdResultOutput[];
+    details: Array<ContentFilterBlocklistIdResultOutput>;
     filtered: boolean;
 }
 
@@ -245,6 +258,7 @@ export interface ContentFilterResultsForChoiceOutput {
     protected_material_text?: ContentFilterDetectionResultOutput;
     self_harm?: ContentFilterResultOutput;
     sexual?: ContentFilterResultOutput;
+    ungrounded_material?: ContentFilterCompletionTextSpanResult;
     violence?: ContentFilterResultOutput;
 }
 
