@@ -19,7 +19,7 @@ This package is primarily used in generated code and not meant to be consumed di
 
 ## Key concepts
 
-You can find an explanation of how this repository's code works by going to our [architecture overview](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/core/core-http/docs/architectureOverview.md).
+You can find an explanation of how this repository's code works by going to our [architecture overview](https://github.com/Azure/azure-sdk-for-js/blob/storage/stable/sdk/core/core-http/docs/architectureOverview.md).
 
 ## Examples
 
